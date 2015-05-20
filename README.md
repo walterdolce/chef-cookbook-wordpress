@@ -16,22 +16,6 @@ e.g.
 Attributes
 ----------
 
-#### chef-cookbook-wordpress::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['chef-cookbook-wordpress']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
-
 #### chef-cookbook-wordpress::downloader
 <table>
   <tr>
@@ -45,6 +29,12 @@ Attributes
     <td>String</td>
     <td>the protocol to use to download Wordpress package</td>
     <td><tt>https</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['wordpress']['downloader']['source']</tt></td>
+    <td>String</td>
+    <td>the default source to get Wordpress package</td>
+    <td><tt>wordpress.org</tt></td>
   </tr>
 </table>
 

@@ -10,4 +10,8 @@ describe 'chef-cookbook-wordpress::downloader' do
     expect(chef_run.node['wordpress']['downloader']['protocol']).to eq('https')
   end
 
+  it 'uses the default Wordpress site URL as source' do
+    expect(chef_run.node['wordpress']['downloader']['source']).to eq('wordpress.org')
+  end
+
 end
