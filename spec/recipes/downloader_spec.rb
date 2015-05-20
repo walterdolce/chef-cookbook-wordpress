@@ -26,6 +26,10 @@ describe 'chef-cookbook-wordpress::downloader' do
     it 'uses the current directory as default destination directory to place the package' do
       expect(chef_run.node['wordpress']['downloader']['destination']).to eq('./')
     end
+
+    it 'uses the default destination filename for the package to be downloaded' do
+      expect(chef_run.node['wordpress']['downloader']['destination_filename']).to eq('wordpress-latest')
+    end
   end
 
 end
