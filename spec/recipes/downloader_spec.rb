@@ -32,4 +32,7 @@ describe 'chef-cookbook-wordpress::downloader' do
     end
   end
 
+  it 'download Wordpress based on the default attributes' do
+    expect(chef_run).to create_remote_file('./wordpress-latest.zip')
+  end
 end
