@@ -96,5 +96,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (= 1.7.4)
   chefspec (= 4.0.1)
