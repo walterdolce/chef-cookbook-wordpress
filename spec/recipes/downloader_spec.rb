@@ -14,4 +14,8 @@ describe 'chef-cookbook-wordpress::downloader' do
     expect(chef_run.node['wordpress']['downloader']['source']).to eq('wordpress.org')
   end
 
+  it 'uses the latest Wordpress version as default package to download' do
+    expect(chef_run.node['wordpress']['downloader']['package_version']).to eq('latest')
+  end
+
 end

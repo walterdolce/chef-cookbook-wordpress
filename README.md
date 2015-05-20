@@ -36,6 +36,12 @@ Attributes
     <td>the default source to get Wordpress package</td>
     <td><tt>wordpress.org</tt></td>
   </tr>
+  <tr>
+    <td><tt>['wordpress']['downloader']['package_version']</tt></td>
+    <td>String</td>
+    <td>the default (latest) Wordpress package version</td>
+    <td><tt>latest</tt></td>
+  </tr>
 </table>
 
 Usage
