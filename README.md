@@ -48,6 +48,18 @@ Attributes
     <td>the default package type to get</td>
     <td><tt>zip</tt></td>
   </tr>
+  <tr>
+    <td><tt>['wordpress']['downloader']['destination']</tt></td>
+    <td>String</td>
+    <td>the destination directory for the package</td>
+    <td><tt>./</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['wordpress']['downloader']['destination_filename']</tt></td>
+    <td>String</td>
+    <td>the destination filename</td>
+    <td><tt>wordpress-latest</tt></td>
+  </tr>
 </table>
 
 Usage
