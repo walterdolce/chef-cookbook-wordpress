@@ -15,9 +15,7 @@ e.g.
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
 
-e.g.
 #### chef-cookbook-wordpress::default
 <table>
   <tr>
@@ -31,6 +29,22 @@ e.g.
     <td>Boolean</td>
     <td>whether to include bacon</td>
     <td><tt>true</tt></td>
+  </tr>
+</table>
+
+#### chef-cookbook-wordpress::downloader
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>['wordpress']['downloader']['protocol']</tt></td>
+    <td>String</td>
+    <td>the protocol to use to download Wordpress package</td>
+    <td><tt>https</tt></td>
   </tr>
 </table>
 
@@ -53,9 +67,12 @@ Just include `chef-cookbook-wordpress` in your node's `run_list`:
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
 
-e.g.
+This cookbook assumes you already have Bundler installed on your system. 
+As you can see in the repository files, there is a `.bundle/config` which defines 
+how Bundler should install the required gems in order for the cookbook to be developed.
+
+TODO: edit the steps below
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
 3. Write your change
