@@ -1,0 +1,4 @@
+# Project specific
+.idea/
+.gems/
+bin/

@@ -1,0 +1,1 @@
+default['wordpress']['downloader']['protocol'] = 'https'
