@@ -42,6 +42,12 @@ Attributes
     <td>the default (latest) Wordpress package version</td>
     <td><tt>latest</tt></td>
   </tr>
+  <tr>
+    <td><tt>['wordpress']['downloader']['package_type']</tt></td>
+    <td>String</td>
+    <td>the default package type to get</td>
+    <td><tt>zip</tt></td>
+  </tr>
 </table>
 
 Usage

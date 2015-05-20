@@ -18,4 +18,8 @@ describe 'chef-cookbook-wordpress::downloader' do
     expect(chef_run.node['wordpress']['downloader']['package_version']).to eq('latest')
   end
 
+  it 'uses zip as default package type to get' do
+    expect(chef_run.node['wordpress']['downloader']['package_type']).to eq('zip')
+  end
+
 end
