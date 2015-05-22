@@ -39,7 +39,6 @@ describe 'chef-cookbook-wordpress::downloader' do
   it 'downloads Wordpress on the specified directory' do
     chef_run.node.set['wordpress']['downloader']['destination'] = '/custom/path/'
     chef_run.converge(described_recipe)
-    expect(chef_run).to create_
     expect(chef_run).to create_remote_file('/custom/path/wordpress-latest.zip')
   end
 end
