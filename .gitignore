@@ -1,4 +1,5 @@
 # Project specific
+.bundle/
 .idea/
 .gems/
 bin/
