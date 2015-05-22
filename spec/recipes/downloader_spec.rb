@@ -33,11 +33,22 @@ describe 'chef-cookbook-wordpress::downloader' do
   end
 
   context 'custom attributes context' do
-    %w(http ftp file).each do |protocol|
-      it "uses #{protocol.upcase} as custom protocol to download Wordpress" do
-        chef_run.node.set['wordpress']['downloader']['protocol'] = protocol
-        chef_run.converge(described_recipe)
-        expect(chef_run.node['wordpress']['downloader']['protocol']).to eq(protocol)
+    context 'protocol attribute' do
+      %w(http ftp file).each do |protocol|
+        it "uses #{protocol.upcase} as custom protocol to download Wordpress" do
+          chef_run.node.set['wordpress']['downloader']['protocol'] = protocol
+          chef_run.converge(described_recipe)
+          expect(chef_run.node['wordpress']['downloader']['protocol']).to eq(protocol)
+        end
+      end
+    end
+    context 'package type attribute' do
+      %w(gzip iis).each do |package_type|
+        it "uses #{package_type.upcase} as custom package type to download" do
+          chef_run.node.set['wordpress']['downloader']['package_type'] = package_type
+          chef_run.converge(described_recipe)
+          expect(chef_run.node['wordpress']['downloader']['package_type']).to eq(package_type)
+        end
       end
     end
   end
