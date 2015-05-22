@@ -44,9 +44,11 @@ describe 'chef-cookbook-wordpress::downloader' do
     end
   end
 
-  it 'creates the destination directory if it does not exist' do
-    chef_run.node.set['wordpress']['downloader']['destination'] = '/missing/directory/'
-    chef_run.converge(described_recipe)
-    expect(chef_run).to create_directory('/missing/directory/')
+  context 'directory actions context' do
+    it 'creates the destination directory if it does not exist' do
+      chef_run.node.set['wordpress']['downloader']['destination'] = '/missing/directory/'
+      chef_run.converge(described_recipe)
+      expect(chef_run).to create_directory('/missing/directory/')
+    end
   end
 end
