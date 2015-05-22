@@ -1,11 +1,13 @@
 
-directory node['wordpress']['downloader']['destination'] do
+destination = node['wordpress']['downloader']['destination']
+
+directory destination do
   recursive true
   action :create
 end
 
 destination = File.join(
-    node['wordpress']['downloader']['destination'],
+    destination,
     node['wordpress']['downloader']['destination_filename'] + '.' + node['wordpress']['downloader']['package_type']
 )
 
