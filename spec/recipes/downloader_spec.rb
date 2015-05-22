@@ -32,6 +32,16 @@ describe 'chef-cookbook-wordpress::downloader' do
     end
   end
 
+  context 'custom attributes context' do
+    %w(http ftp file).each do |protocol|
+      it "uses #{protocol.upcase} as custom protocol to download Wordpress" do
+        chef_run.node.set['wordpress']['downloader']['protocol'] = protocol
+        chef_run.converge(described_recipe)
+        expect(chef_run.node['wordpress']['downloader']['protocol']).to eq(protocol)
+      end
+    end
+  end
+
   context 'download actions context' do
     it 'downloads Wordpress based on the default attributes' do
       expect(chef_run).to create_remote_file('./wordpress-latest.zip')
