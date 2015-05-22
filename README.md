@@ -82,10 +82,6 @@ Just include `chef-cookbook-wordpress` in your node's `run_list`:
 Contributing
 ------------
 
-This cookbook assumes you already have Bundler installed on your system. 
-As you can see in the repository files, there is a `.bundle/config` which defines 
-how Bundler should install the required gems in order for the cookbook to be developed.
-
 TODO: edit the steps below
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
