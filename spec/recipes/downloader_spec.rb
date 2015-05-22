@@ -64,6 +64,16 @@ describe 'chef-cookbook-wordpress::downloader' do
       end
     end
 
+    context 'package version attribute' do
+      %w(1.0.0 3.2.0).each do |package_version|
+        it "uses a custom version (#{package_version}) as package version to download" do
+            chef_run.node.set['wordpress']['downloader']['package_version'] = package_version
+          chef_run.converge(described_recipe)
+          expect(chef_run.node['wordpress']['downloader']['package_version']).to eq(package_version)
+        end
+      end
+    end
+
   end
 
   context 'download actions context' do
