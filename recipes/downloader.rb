@@ -1,4 +1,8 @@
 
+directory node['wordpress']['downloader']['destination'] do
+  recursive true
+  action :create
+end
 
 destination = File.join(
     node['wordpress']['downloader']['destination'],
