@@ -1,10 +1,9 @@
 require 'chefspec'
 
 describe 'chef-cookbook-wordpress::downloader' do
-
-  let(:chef_run) {
-    ChefSpec::Runner.new({cookbook_path: '../'}).converge(described_recipe)
-  }
+  let(:chef_run) do
+    ChefSpec::Runner.new(cookbook_path: '../').converge(described_recipe)
+  end
 
   context 'default attributes context' do
     it 'uses HTTPS as default protocol to download Wordpress' do
@@ -123,11 +122,10 @@ describe 'chef-cookbook-wordpress::downloader' do
     end
 
     it 'creates the destination directory with a custom user and group assigned' do
-      chef_run.node.set['wordpress']['downloader']['destination_dir_user'] = 'automator'
+      chef_run.node.set['wordpress']['downloader']['destination_dir_user'] =  'automator'
       chef_run.node.set['wordpress']['downloader']['destination_dir_group'] = 'automators'
       chef_run.converge(described_recipe)
       expect(chef_run).to create_directory('./').with(user: 'automator', group: 'automators')
     end
   end
-
 end

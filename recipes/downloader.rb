@@ -1,27 +1,21 @@
+node_attribute = node['wordpress']['downloader']
 
-destination = node['wordpress']['downloader']['destination']
+destination_uri = node_attribute['destination']
+filename = "#{node_attribute['destination_filename']}.#{node_attribute['package_type']}"
 
-directory destination do
-  user node['wordpress']['downloader']['destination_dir_user']
-  group node['wordpress']['downloader']['destination_dir_group']
+directory destination_uri do
+  user node_attribute['destination_dir_user']
+  group node_attribute['destination_dir_group']
   recursive true
   action :create
 end
 
-destination = File.join(
-    destination,
-    node['wordpress']['downloader']['destination_filename'] + '.' + node['wordpress']['downloader']['package_type']
-)
+source_uri = node_attribute['protocol'] + '://' + node_attribute['source'] + '/'
+source_uri = source_uri + node_attribute['package_version'] + '.' + node_attribute['package_type']
 
-remote_file destination do
-  source node['wordpress']['downloader']['protocol'] + 
-             '://' + 
-             node['wordpress']['downloader']['source'] + 
-             '/' +
-             node['wordpress']['downloader']['package_version'] + 
-             '.' + 
-             node['wordpress']['downloader']['package_type']
-  user node['wordpress']['downloader']['destination_file_user']
-  group node['wordpress']['downloader']['destination_file_group']
+remote_file File.join(destination_uri, filename) do
+  source source_uri
+  user node_attribute['destination_file_user']
+  group node_attribute['destination_file_group']
   action :create
 end
