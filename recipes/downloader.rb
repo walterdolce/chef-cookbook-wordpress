@@ -2,6 +2,8 @@
 destination = node['wordpress']['downloader']['destination']
 
 directory destination do
+  user node['wordpress']['downloader']['destination_dir_user']
+  group node['wordpress']['downloader']['destination_dir_group']
   recursive true
   action :create
 end

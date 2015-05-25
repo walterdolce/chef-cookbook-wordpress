@@ -99,5 +99,8 @@ describe 'chef-cookbook-wordpress::downloader' do
       chef_run.converge(described_recipe)
       expect(chef_run).to create_directory('/missing/directory/')
     end
+    it 'creates the destination directory with root as user & group assigned by default' do
+      expect(chef_run).to create_directory('./').with(user: 'root', group: 'root')
+    end
   end
 end

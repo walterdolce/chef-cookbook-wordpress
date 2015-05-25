@@ -4,3 +4,5 @@ default['wordpress']['downloader']['package_version'] = 'latest' # See https://w
 default['wordpress']['downloader']['package_type'] = 'zip' # zip | gzip | iis
 default['wordpress']['downloader']['destination'] = './'
 default['wordpress']['downloader']['destination_filename'] = 'wordpress-latest'
+default['wordpress']['downloader']['destination_dir_user'] = 'root'
+default['wordpress']['downloader']['destination_dir_group'] = 'root'

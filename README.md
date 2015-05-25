@@ -60,6 +60,18 @@ Attributes
     <td>the destination filename</td>
     <td><tt>wordpress-latest</tt></td>
   </tr>
+  <tr>
+    <td><tt>['wordpress']['downloader']['destination_dir_user']</tt></td>
+    <td>String</td>
+    <td>the user under which the destination directory path will be assigned</td>
+    <td><tt>root</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['wordpress']['downloader']['destination_dir_group']</tt></td>
+    <td>String</td>
+    <td>the group under which the destination directory path will be assigned</td>
+    <td><tt>root</tt></td>
+  </tr>
 </table>
 
 Usage
