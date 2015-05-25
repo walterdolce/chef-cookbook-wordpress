@@ -41,7 +41,6 @@ describe 'chef-cookbook-wordpress::downloader' do
   end
 
   context 'custom attributes context' do
-
     context 'protocol attribute' do
       %w(http ftp file).each do |protocol|
         it "uses #{protocol.upcase} as custom protocol to download Wordpress" do
@@ -129,7 +128,6 @@ describe 'chef-cookbook-wordpress::downloader' do
       chef_run.converge(described_recipe)
       expect(chef_run).to create_directory('./').with(user: 'automator', group: 'automators')
     end
-
   end
 
 end
