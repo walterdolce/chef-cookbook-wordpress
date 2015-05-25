@@ -30,6 +30,14 @@ describe 'chef-cookbook-wordpress::downloader' do
     it 'uses the default destination filename for the package to be downloaded' do
       expect(chef_run.node['wordpress']['downloader']['destination_filename']).to eq('wordpress-latest')
     end
+
+    it 'uses root as default destination directory user' do
+      expect(chef_run.node['wordpress']['downloader']['destination_dir_user']).to eq('root')
+    end
+
+    it 'uses root as default destination directory group' do
+      expect(chef_run.node['wordpress']['downloader']['destination_dir_group']).to eq('root')
+    end
   end
 
   context 'custom attributes context' do
@@ -99,14 +107,18 @@ describe 'chef-cookbook-wordpress::downloader' do
       chef_run.converge(described_recipe)
       expect(chef_run).to create_directory('/missing/directory/')
     end
+
     it 'creates the destination directory with root as user & group assigned by default' do
       expect(chef_run).to create_directory('./').with(user: 'root', group: 'root')
     end
+
     it 'creates the destination directory with a custom user and group assigned' do
       chef_run.node.set['wordpress']['downloader']['destination_dir_user'] = 'automator'
       chef_run.node.set['wordpress']['downloader']['destination_dir_group'] = 'automators'
       chef_run.converge(described_recipe)
       expect(chef_run).to create_directory('./').with(user: 'automator', group: 'automators')
     end
+
   end
+
 end
