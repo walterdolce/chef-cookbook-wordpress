@@ -21,5 +21,7 @@ remote_file destination do
              node['wordpress']['downloader']['package_version'] + 
              '.' + 
              node['wordpress']['downloader']['package_type']
+  user node['wordpress']['downloader']['destination_file_user']
+  group node['wordpress']['downloader']['destination_file_group']
   action :create
 end

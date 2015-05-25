@@ -99,6 +99,10 @@ describe 'chef-cookbook-wordpress::downloader' do
       chef_run.converge(described_recipe)
       expect(chef_run).to create_remote_file('/custom/path/wordpress-latest.zip')
     end
+
+    it 'downloads Wordpress by assigning it to root user & group' do
+      expect(chef_run).to create_remote_file('./wordpress-latest.zip').with(user: 'root', group: 'root')
+    end
   end
 
   context 'directory actions context' do
