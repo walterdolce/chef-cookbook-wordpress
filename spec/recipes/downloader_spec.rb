@@ -102,5 +102,11 @@ describe 'chef-cookbook-wordpress::downloader' do
     it 'creates the destination directory with root as user & group assigned by default' do
       expect(chef_run).to create_directory('./').with(user: 'root', group: 'root')
     end
+    it 'creates the destination directory with a custom user and group assigned' do
+      chef_run.node.set['wordpress']['downloader']['destination_dir_user'] = 'automator'
+      chef_run.node.set['wordpress']['downloader']['destination_dir_group'] = 'automators'
+      chef_run.converge(described_recipe)
+      expect(chef_run).to create_directory('./').with(user: 'automator', group: 'automators')
+    end
   end
 end
