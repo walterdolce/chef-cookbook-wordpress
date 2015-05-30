@@ -49,6 +49,8 @@ GEM
     hashie (2.1.2)
     highline (1.7.2)
     ipaddress (0.8.0)
+    kitchen-vagrant (0.18.0)
+      test-kitchen (~> 1.4)
     libyajl2 (1.2.0)
     method_source (0.8.2)
     mime-types (2.6.1)
@@ -142,5 +144,6 @@ PLATFORMS
 
 DEPENDENCIES
   chefspec (= 4.2.0)
+  kitchen-vagrant (= 0.18.0)
   rubocop (= 0.31.0)
   test-kitchen (= 1.4.0)
