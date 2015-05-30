@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'chef-cookbook-wordpress::downloader' do
   let(:chef_run) do
-    ChefSpec::Runner.new(cookbook_path: '../').converge(described_recipe)
+    ChefSpec::SoloRunner.new(cookbook_path: '../').converge(described_recipe)
   end
 
   context 'default attributes context' do
