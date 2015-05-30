@@ -1,20 +1,20 @@
 downloader = node['wordpress']['downloader']
-
-destination_uri = downloader['destination']
-filename = "#{downloader['destination_filename']}.#{downloader['package_type']}"
+file_uri = File.join(
+  downloader['destination'],
+  "#{downloader['destination_filename']}.#{downloader['package_type']}"
+)
 source = (downloader['protocol'] == 'file') ? "/#{downloader['source']}" : downloader['source']
 
-directory destination_uri do
+directory downloader['destination'] do
   user downloader['destination_dir_user']
   group downloader['destination_dir_group']
   recursive true
   action :create
 end
 
-source_uri = downloader['protocol'] + '://' + source + '/'
-source_uri = source_uri + downloader['package_version'] + '.' + downloader['package_type']
+source_uri = %(#{downloader['protocol']}://#{source}/#{downloader['package_version']}.#{downloader['package_type']})
 
-remote_file File.join(destination_uri, filename) do
+remote_file file_uri do
   source source_uri
   user downloader['destination_file_user']
   group downloader['destination_file_group']
