@@ -1,0 +1,7 @@
+DEPENDENCIES
+  chef-cookbook-wordpress
+    path: .
+    metadata: true
+
+GRAPH
+  chef-cookbook-wordpress (0.1.0)
