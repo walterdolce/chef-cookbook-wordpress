@@ -91,7 +91,7 @@ describe 'chef-cookbook-wordpress::downloader' do
 
     context 'package version attribute' do
       %w(1.0.0 3.2.0).each do |package_version|
-        it "uses a custom version (#{package_version}) as package version to download" do
+        it "uses a custom version (#{package_version}) attribute as package version to download" do
           chef_run.node.set['wordpress']['downloader']['package_version'] = package_version
           chef_run.converge(described_recipe)
           expect(chef_run.node['wordpress']['downloader']['package_version']).to eq(package_version)
@@ -99,24 +99,16 @@ describe 'chef-cookbook-wordpress::downloader' do
       end
     end
 
-    it 'uses a custom destination filename as filename to download' do
+    it 'uses a custom destination filename attribute as filename to download' do
       chef_run.node.set['wordpress']['downloader']['destination_filename'] = 'my-wordpress-package'
       chef_run.converge(described_recipe)
-      expect(chef_run).to create_remote_file('./my-wordpress-package.zip')
       expect(chef_run.node['wordpress']['downloader']['destination_filename']).to eq('my-wordpress-package')
     end
   end
 
   context 'download actions context' do
     it 'downloads Wordpress based on the default attributes' do
-      expect(chef_run).to create_remote_file('./wordpress-latest.zip')
-    end
-
-    it 'downloads Wordpress on the specified directory' do
-      chef_run.node.set['wordpress']['downloader']['destination'] = '/custom/path/'
-      chef_run.converge(described_recipe)
-      expect(chef_run).to create_directory('/custom/path/')
-      expect(chef_run).to create_remote_file('/custom/path/wordpress-latest.zip')
+      expect(chef_run).to create_remote_file('./wordpress-latest.zip').with(source: 'https://wordpress.org/latest.zip')
     end
 
     it 'downloads Wordpress by assigning it to root user & group' do
@@ -129,16 +121,22 @@ describe 'chef-cookbook-wordpress::downloader' do
       chef_run.converge(described_recipe)
       expect(chef_run).to create_remote_file('./wordpress-latest.zip').with(user: 'automator', group: 'automators')
     end
+
+    it 'downloads Wordpress by using a custom destination filename' do
+      chef_run.node.set['wordpress']['downloader']['destination_filename'] = 'my-wordpress-package'
+      chef_run.converge(described_recipe)
+      expect(chef_run).to create_remote_file('./my-wordpress-package.zip')
+    end
+
+    it 'downloads a custom version of Wordpress' do
+      chef_run.node.set['wordpress']['downloader']['destination_filename'] = 'wordpress-4.2.2'
+      chef_run.node.set['wordpress']['downloader']['package_version'] = 'wordpress-4.2.2'
+      chef_run.converge(described_recipe)
+      expect(chef_run).to create_remote_file('./wordpress-4.2.2.zip').with(source: 'https://wordpress.org/wordpress-4.2.2.zip')
+    end
   end
 
   context 'directory actions context' do
-    it 'creates the destination directory if it does not exist' do
-      chef_run.node.set['wordpress']['downloader']['destination'] = '/missing/directory/'
-      chef_run.converge(described_recipe)
-      expect(chef_run).to create_directory('/missing/directory/')
-      expect(chef_run).to create_remote_file('/missing/directory/wordpress-latest.zip')
-    end
-
     it 'creates the destination directory with root as user & group assigned by default' do
       expect(chef_run).to create_directory('./').with(user: 'root', group: 'root')
     end
@@ -148,6 +146,13 @@ describe 'chef-cookbook-wordpress::downloader' do
       chef_run.node.set['wordpress']['downloader']['destination_dir_group'] = 'automators'
       chef_run.converge(described_recipe)
       expect(chef_run).to create_directory('./').with(user: 'automator', group: 'automators')
+    end
+
+    it 'creates the destination directory if it does not exist and downloads Wordpress in there' do
+      chef_run.node.set['wordpress']['downloader']['destination'] = '/missing/directory/'
+      chef_run.converge(described_recipe)
+      expect(chef_run).to create_directory('/missing/directory/')
+      expect(chef_run).to create_remote_file('/missing/directory/wordpress-latest.zip')
     end
   end
 end
