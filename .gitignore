@@ -1,5 +1,11 @@
-# Project specific
-.bundle/
+# IDE
 .idea/
+
+# Project
+.bundle/
 .gems/
 bin/
+
+# Test-kitchen
+.kitchen/
+.kitchen.local.yml
