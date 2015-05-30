@@ -12,10 +12,8 @@ directory downloader['destination'] do
   action :create
 end
 
-source_uri = %(#{downloader['protocol']}://#{source}/#{downloader['package_version']}.#{downloader['package_type']})
-
 remote_file file_uri do
-  source source_uri
+  source "#{downloader['protocol']}://#{source}/#{downloader['package_version']}.#{downloader['package_type']}"
   user downloader['destination_file_user']
   group downloader['destination_file_group']
   action :create
