@@ -1,4 +1,4 @@
-require 'chefspec'
+require 'spec_helper'
 
 describe 'chef-cookbook-wordpress::downloader' do
   let(:chef_run) do
