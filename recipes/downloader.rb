@@ -2,8 +2,7 @@ downloader = node['wordpress']['downloader']
 
 destination_uri = downloader['destination']
 filename = "#{downloader['destination_filename']}.#{downloader['package_type']}"
-source = downloader['source']
-source = "/#{source}" if downloader['protocol'] == 'file'
+source = (downloader['protocol'] == 'file') ? "/#{downloader['source']}" : downloader['source']
 
 directory destination_uri do
   user downloader['destination_dir_user']
