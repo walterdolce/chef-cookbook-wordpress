@@ -5,4 +5,5 @@ group :development do
   gem 'rubocop', '0.31.0'
   gem 'test-kitchen', '1.4.0'
   gem 'kitchen-vagrant', '0.18.0'
+  gem 'serverspec', '2.17.0'
 end
