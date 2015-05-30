@@ -12,11 +12,6 @@ filename = downloader['destination_filename']
 package_type = 'zip' if downloader['package_type'] == 'iis'
 package_version = downloader['package_version']
 package_version = "#{package_version}-IIS" if downloader['package_type'] == 'iis'
-
-file_uri = File.join(
-  downloader['destination'],
-  "#{filename}.#{package_type}"
-)
 source = (downloader['protocol'] == 'file') ? "/#{downloader['source']}" : downloader['source']
 
 directory downloader['destination'] do
@@ -26,7 +21,7 @@ directory downloader['destination'] do
   action :create
 end
 
-remote_file file_uri do
+remote_file File.join(downloader['destination'], "#{filename}.#{package_type}") do
   source "#{downloader['protocol']}://#{source}/#{package_version}.#{package_type}"
   user downloader['destination_file_user']
   group downloader['destination_file_group']
