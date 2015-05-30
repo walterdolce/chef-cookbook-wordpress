@@ -47,6 +47,17 @@ describe 'chef-cookbook-wordpress::downloader' do
           chef_run.converge(described_recipe)
           expect(chef_run.node['wordpress']['downloader']['protocol']).to eq(protocol)
         end
+
+        it "uses a well formed URI when using #{protocol.upcase} as protocol to download Wordpress" do
+          chef_run.node.set['wordpress']['downloader']['protocol'] = protocol
+          chef_run.converge(described_recipe)
+          source = chef_run.node['wordpress']['downloader']['source']
+          source = "/#{source}" if protocol == 'file'
+          package_version = chef_run.node['wordpress']['downloader']['package_version']
+          package_type = chef_run.node['wordpress']['downloader']['package_type']
+          source = "#{protocol}://#{source}/#{package_version}.#{package_type}"
+          expect(chef_run).to create_remote_file('./wordpress-latest.zip').with(source: source)
+        end
       end
     end
 
