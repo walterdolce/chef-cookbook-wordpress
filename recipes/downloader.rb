@@ -7,9 +7,12 @@ if downloader['package_version'] == 'latest' && downloader['package_type'] == 'i
   you must to explicitly specify it in the attributes.'
 end
 
-package_type = (downloader['package_type'] == 'gzip') ? 'tar.gz' : downloader['package_type']
-filename = downloader['destination_filename']
-package_type = 'zip' if downloader['package_type'] == 'iis'
+case downloader['package_type']
+when 'gzip'
+  package_type = 'tar.gz'
+else
+  package_type = 'zip'
+end
 package_version = downloader['package_version']
 package_version = "#{package_version}-IIS" if downloader['package_type'] == 'iis'
 source = (downloader['protocol'] == 'file') ? "/#{downloader['source']}" : downloader['source']
@@ -21,7 +24,8 @@ directory downloader['destination'] do
   action :create
 end
 
-remote_file File.join(downloader['destination'], "#{filename}.#{package_type}") do
+remote_file 'Download Wordpress package' do
+  path File.join(downloader['destination'], "#{downloader['destination_filename']}.#{package_type}")
   source "#{downloader['protocol']}://#{source}/#{package_version}.#{package_type}"
   user downloader['destination_file_user']
   group downloader['destination_file_group']
