@@ -61,45 +61,27 @@ describe 'chef-cookbook-wordpress::downloader' do
       end
     end
 
-    context 'source attribute' do
-      %w(example.com /local/path).each do |source|
-        it "uses a custom source to get Wordpress (#{source})" do
-          chef_run.node.set['wordpress']['downloader']['source'] = source
-          chef_run.converge(described_recipe)
-          expect(chef_run.node['wordpress']['downloader']['source']).to eq(source)
-        end
+    %w(example.com /local/path).each do |source|
+      it "uses a custom source attribute (#{source})" do
+        chef_run.node.set['wordpress']['downloader']['source'] = source
+        chef_run.converge(described_recipe)
+        expect(chef_run.node['wordpress']['downloader']['source']).to eq(source)
       end
     end
 
-    context 'package type attribute' do
-      %w(gzip iis).each do |package_type|
-        it "uses #{package_type.upcase} as custom package type to download" do
-          chef_run.node.set['wordpress']['downloader']['destination_filename'] = 'wordpress-4.2.2'
-          chef_run.node.set['wordpress']['downloader']['package_version'] = 'wordpress-4.2.2'
-          chef_run.node.set['wordpress']['downloader']['package_type'] = package_type
-          chef_run.converge(described_recipe)
-          expect(chef_run.node['wordpress']['downloader']['package_type']).to eq(package_type)
-          case package_type
-          when 'gzip'
-            expect(chef_run).to create_remote_file('./wordpress-4.2.2.tar.gz').with(source: 'https://wordpress.org/wordpress-4.2.2.tar.gz')
-          else
-            expect(chef_run).to create_remote_file('./wordpress-4.2.2-IIS.zip').with(source: 'https://wordpress.org/wordpress-4.2.2-IIS.zip')
-          end
-        end
-      end
+    it 'uses a custom package type attribute' do
+      chef_run.node.set['wordpress']['downloader']['package_type'] = 'gzip'
+      chef_run.converge(described_recipe)
+      expect(chef_run.node['wordpress']['downloader']['package_type']).to eq('gzip')
     end
 
-    context 'package version attribute' do
-      %w(1.0.0 3.2.0).each do |package_version|
-        it "uses a custom version (#{package_version}) attribute as package version to download" do
-          chef_run.node.set['wordpress']['downloader']['package_version'] = package_version
-          chef_run.converge(described_recipe)
-          expect(chef_run.node['wordpress']['downloader']['package_version']).to eq(package_version)
-        end
-      end
+    it 'uses a custom package version attribute' do
+      chef_run.node.set['wordpress']['downloader']['package_version'] = 'wordpress-3.2.0'
+      chef_run.converge(described_recipe)
+      expect(chef_run.node['wordpress']['downloader']['package_version']).to eq('wordpress-3.2.0')
     end
 
-    it 'uses a custom destination filename attribute as filename to download' do
+    it 'uses a custom destination filename attribute' do
       chef_run.node.set['wordpress']['downloader']['destination_filename'] = 'my-wordpress-package'
       chef_run.converge(described_recipe)
       expect(chef_run.node['wordpress']['downloader']['destination_filename']).to eq('my-wordpress-package')
@@ -133,6 +115,20 @@ describe 'chef-cookbook-wordpress::downloader' do
       chef_run.node.set['wordpress']['downloader']['package_version'] = 'wordpress-4.2.2'
       chef_run.converge(described_recipe)
       expect(chef_run).to create_remote_file('./wordpress-4.2.2.zip').with(source: 'https://wordpress.org/wordpress-4.2.2.zip')
+    end
+
+    it 'downloads the correct package when gzip package type is requested' do
+      chef_run.node.set['wordpress']['downloader']['package_type'] = 'gzip'
+      chef_run.converge(described_recipe)
+      expect(chef_run).to create_remote_file('./wordpress-latest.tar.gz').with(source: 'https://wordpress.org/latest.tar.gz')
+    end
+
+    it 'downloads the correct package when iis package type is requested' do
+      chef_run.node.set['wordpress']['downloader']['package_type'] = 'iis'
+      chef_run.node.set['wordpress']['downloader']['destination_filename'] = 'my-iis-wordpress-instance'
+      chef_run.node.set['wordpress']['downloader']['package_version'] = 'wordpress-4.2.2'
+      chef_run.converge(described_recipe)
+      expect(chef_run).to create_remote_file('./my-iis-wordpress-instance.zip').with(source: 'https://wordpress.org/wordpress-4.2.2-IIS.zip')
     end
   end
 

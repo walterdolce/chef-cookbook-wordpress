@@ -1,9 +1,16 @@
 downloader = node['wordpress']['downloader']
+
+if downloader['package_version'] == 'latest' && downloader['package_type'] == 'iis'
+  fail '
+  The requested package version & type (latest + iis) is not available.
+  If you want to download the latest Wordpress IIS package version
+  you must to explicitly specify it in the attributes.'
+end
+
 package_type = (downloader['package_type'] == 'gzip') ? 'tar.gz' : downloader['package_type']
 filename = downloader['destination_filename']
 package_type = 'zip' if downloader['package_type'] == 'iis'
 package_version = downloader['package_version']
-filename = "#{filename}-IIS" if downloader['package_type'] == 'iis'
 package_version = "#{package_version}-IIS" if downloader['package_type'] == 'iis'
 
 file_uri = File.join(
