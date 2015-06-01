@@ -24,10 +24,14 @@ directory downloader['destination'] do
   action :create
 end
 
+file_uri = File.join(downloader['destination'], "#{downloader['destination_filename']}.#{package_type}")
+
 remote_file 'Download Wordpress package' do
-  path File.join(downloader['destination'], "#{downloader['destination_filename']}.#{package_type}")
+  path file_uri
   source "#{downloader['protocol']}://#{source}/#{package_version}.#{package_type}"
   user downloader['destination_file_user']
   group downloader['destination_file_group']
   action :create
 end
+
+node.set['wordpress']['installer']['downloaded_archive'] = file_uri
