@@ -20,8 +20,12 @@ if node[:wordpress].attribute?(:installer) && node[:wordpress][:installer].attri
 
     destination = node['wordpress']['installer']['extraction_destination']
 
+    ::Chef::Recipe.send(:include, Chef::Mixin::Checksum)
+    checksum = checksum(archive)
+
     execute 'Extract downloaded archive' do
       command "#{extractor} #{extraction_options} #{archive} #{extraction_destination_option} #{destination}"
+      not_if { ::File.exist?("#{destination.gsub(%r{/+$}, '')}/#{checksum}") }
     end
   end
 end
