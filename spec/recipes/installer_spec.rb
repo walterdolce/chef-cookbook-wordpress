@@ -58,4 +58,12 @@ describe 'chef-cookbook-wordpress::installer' do
     chef_run.converge(described_recipe)
     expect(chef_run).not_to run_execute('Extract downloaded archive')
   end
+
+  it 'installs wp-config.php template file' do
+    allow(File).to receive(:exist?).with(anything).and_return(true)
+    allow(File).to receive(:exist?).with('./checksum').and_return(false)
+    chef_run.node.set['wordpress']['installer']['downloaded_archive'] = '/wordpress-latest.zip'
+    chef_run.converge(described_recipe)
+    expect(chef_run).to create_template('Create/Update wp-config.php file')
+  end
 end

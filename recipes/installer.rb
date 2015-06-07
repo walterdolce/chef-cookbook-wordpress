@@ -27,5 +27,13 @@ if node[:wordpress].attribute?(:installer) && node[:wordpress][:installer].attri
       command "#{extractor} #{extraction_options} #{archive} #{extraction_destination_option} #{destination}"
       not_if { ::File.exist?("#{destination.gsub(%r{/+$}, '')}/#{checksum}") }
     end
+
+    template 'Create/Update wp-config.php file' do
+      path "#{destination.gsub(%r{/+$}, '')}/wp-config.php"
+      source 'wp-config.php.erb'
+      mode 0640
+      action :create
+    end
+
   end
 end
