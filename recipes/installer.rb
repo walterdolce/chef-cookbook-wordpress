@@ -31,7 +31,7 @@ if node[:wordpress].attribute?(:installer) && node[:wordpress][:installer].attri
     template 'Create/Update wp-config.php file' do
       path "#{destination.gsub(%r{/+$}, '')}/wp-config.php"
       source 'wp-config.php.erb'
-      mode 0640
+      mode node['wordpress']['installer']['wp_config_file_mode']
       action :create
     end
 
