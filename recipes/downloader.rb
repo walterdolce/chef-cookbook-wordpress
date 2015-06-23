@@ -1,7 +1,7 @@
 downloader = node['wordpress']['downloader']
 
 if downloader['package_version'] == 'latest' && downloader['package_type'] == 'iis'
-  fail '
+  raise '
   The requested package version & type (latest + iis) is not available.
   If you want to download the latest Wordpress IIS package version
   you must to explicitly specify it in the attributes.'
