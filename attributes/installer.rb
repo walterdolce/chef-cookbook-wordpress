@@ -18,8 +18,8 @@ default['wordpress']['installer']['wp_config']['nonce_salt'] = ''
 default['wordpress']['installer']['wp_config']['table_prefix'] = 'wp_'
 default['wordpress']['installer']['wp_config']['wp_debug'] = false
 ##
-# An hash definition like { 'WP_CONSTANT' => 'value' }
-# will translate in a PHP constant definition:
+# A hash definition like { 'WP_CONSTANT' => 'value' }
+# will translate in a PHP constant definition like
 # define('WP_CONSTANT', 'value')
 ##
 default['wordpress']['installer']['wp_config']['additional_values'] = {}
