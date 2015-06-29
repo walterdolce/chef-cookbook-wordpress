@@ -1,0 +1,5 @@
+# VCSs
+*/.git/*
+
+# Test-Kitchen
+*/.kitchen/*
