@@ -1,5 +1,9 @@
 # VCSs
-*/.git/*
+.git
 
 # Test-Kitchen
-*/.kitchen/*
+.kitchen
+
+# Project
+bin
+.gems
