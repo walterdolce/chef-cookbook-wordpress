@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 group :development do
+  gem 'vagrant', '1.7.2', :git => 'https://github.com/mitchellh/vagrant.git'
   gem 'rake', '10.4.2'
   gem 'berkshelf', '3.2.4'
   gem 'chefspec', '4.2.0'
