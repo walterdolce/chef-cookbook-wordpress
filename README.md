@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/walterdolce/chef-cookbook-wordpress.svg)](https://travis-ci.org/walterdolce/chef-cookbook-wordpress)
+
 chef-cookbook-wordpress Cookbook
 ================================
 This cookbook can download a Wordpress archive and install the instance.
