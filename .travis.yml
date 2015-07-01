@@ -1,5 +1,7 @@
 language: ruby
 rvm:
   - 2.2.0
+before_install:
+  - sudo apt-get install -qq virtualbox
 matrix:
   fast_finish: true
