@@ -1,11 +1,5 @@
 language: ruby
 rvm:
   - 2.2.0
-before_install:
-  - sudo apt-get -y update
-  - sudo apt-get -y --fix-missing
-  - sudo sh -c "echo 'deb http://download.virtualbox.org/virtualbox/debian '$(lsb_release -cs)' contrib non-free' > /etc/apt/sources.list.d/virtualbox.list" && wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
-  - sudo apt-get -y install dkms build-essential linux-headers-generic virtualbox virtualbox-qt virtualbox-dkms virtualbox-guest-dkms virtualbox-ose-dkms
-  - VBoxManage --version
 matrix:
   fast_finish: true
