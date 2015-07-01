@@ -3,6 +3,7 @@ rvm:
   - 2.2.0
 before_install:
   - sudo apt-get update -q
+  - sudo apt-get install-q dkms build-essential
   - sudo apt-get install -q virtualbox --fix-missing
   - VBoxManage --version
 matrix:
