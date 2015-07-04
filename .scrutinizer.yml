@@ -6,10 +6,10 @@ build:
       - mkdir .bundle
       - touch .bundle/config
       - echo "---" | tee .bundle/config
-      - echo "BUNDLE_PATH: './.gems'" | tee .bundle/config
-      - echo "BUNDLE_BIN: './bin'" | tee .bundle/config
-      - echo "BUNDLE_GEMFILE: './'" | tee .bundle/config
-      - echo "BUNDLE_DISABLE_SHARED_GEMS: '1'" | tee .bundle/config
+      - echo "BUNDLE_PATH: ./.gems" | tee .bundle/config
+      - echo "BUNDLE_BIN: ./bin" | tee .bundle/config
+      - echo "BUNDLE_GEMFILE: ./" | tee .bundle/config
+      - echo "BUNDLE_DISABLE_SHARED_GEMS: 1" | tee .bundle/config
       - sudo apt-get update -y
       - sudo apt-get install -y linux-headers-generic dkms virtualbox-dkms virtualbox virtualbox-guest-dkms
       - VBoxManage --version
