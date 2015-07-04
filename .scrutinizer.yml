@@ -4,8 +4,9 @@ build:
   dependencies:
     before:
       - sudo apt-get update -y
-      - sudo apt-get install -y dkms virtualbox virtualbox-dkms virtualbox-guest-dkms
+      - sudo apt-get install -y linux-headers-generic dkms virtualbox virtualbox-dkms virtualbox-guest-dkms
       - VBoxManage --version
+      - bundle install
   tests:
     override:
       - rspec
