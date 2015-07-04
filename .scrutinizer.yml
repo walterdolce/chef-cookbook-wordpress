@@ -1,0 +1,14 @@
+build:
+  environment:
+    ruby: '2.2.0'
+  dependencies:
+    before:
+      - sudo apt-get update -y
+      - sudo apt-get install -y dkms virtualbox virtualbox-dkms virtualbox-guest-dkms virtualbox-ose-dkms
+      - VBoxManage --version
+  tests:
+    override:
+      - rspec
+      - kitchen test
+  checks:
+    ruby: true

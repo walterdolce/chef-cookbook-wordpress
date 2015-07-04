@@ -277,7 +277,7 @@ GEM
     solve (1.2.1)
       dep_selector (~> 1.0)
       semverse (~> 1.1)
-    specinfra (2.36.9)
+    specinfra (2.36.11)
       net-scp
       net-ssh
       net-telnet
@@ -296,6 +296,8 @@ GEM
       unf_ext
     unf_ext (0.0.7.1)
     uuidtools (2.1.5)
+    vagrant-multiplug (0.0.3)
+    vagrant-openvz (0.0.7)
     varia_model (0.4.0)
       buff-extensions (~> 1.0)
       hashie (>= 2.0.2, < 3.0.0)
@@ -324,3 +326,5 @@ DEPENDENCIES
   serverspec (= 2.17.0)
   test-kitchen (= 1.4.0)
   vagrant!
+  vagrant-multiplug (= 0.0.3)
+  vagrant-openvz (= 0.0.7)
