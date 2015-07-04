@@ -6,6 +6,8 @@ build:
       - sudo apt-get update -y
       - sudo apt-get install -y linux-headers-generic dkms virtualbox-dkms virtualbox virtualbox-guest-dkms
       - VBoxManage --version
+      - sudo apt-get update -y
+      - VBoxManage --version
       - { command: 'bundle install', idle_timeout: 800 }
   tests:
     override:
