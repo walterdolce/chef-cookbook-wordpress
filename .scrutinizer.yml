@@ -10,5 +10,5 @@ build:
     override:
       - rspec
       - kitchen test
-  checks:
-    ruby: true
+checks:
+  ruby: true
