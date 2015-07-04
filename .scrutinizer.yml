@@ -4,11 +4,12 @@ build:
   dependencies:
     before:
       - mkdir .bundle
-      - echo '---' >> .bundle/config
-      - echo 'BUNDLE_PATH: "./.gems"' >> .bundle/config
-      - echo 'BUNDLE_BIN: "./bin"' >> .bundle/config
-      - echo 'BUNDLE_GEMFILE: "./"' >> .bundle/config
-      - echo 'BUNDLE_DISABLE_SHARED_GEMS: "1"' >> .bundle/config
+      - touch .bundle/config
+      - echo "---" >> .bundle/config
+      - echo "BUNDLE_PATH: './.gems'" >> .bundle/config
+      - echo "BUNDLE_BIN: './bin'" >> .bundle/config
+      - echo "BUNDLE_GEMFILE: './'" >> .bundle/config
+      - echo "BUNDLE_DISABLE_SHARED_GEMS: '1'" >> .bundle/config
       - sudo apt-get update -y
       - sudo apt-get install -y linux-headers-generic dkms virtualbox-dkms virtualbox virtualbox-guest-dkms
       - VBoxManage --version
