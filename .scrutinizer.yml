@@ -3,13 +3,21 @@ build:
     ruby: '2.2.0'
   dependencies:
     before:
+      - mkdir .bundle
+      - echo '---' >> .bundle/config
+      - echo 'BUNDLE_PATH: "./.gems"' >> .bundle/config
+      - echo 'BUNDLE_BIN: "./bin"' >> .bundle/config
+      - echo 'BUNDLE_GEMFILE: "./"' >> .bundle/config
+      - echo 'BUNDLE_DISABLE_SHARED_GEMS: "1"' >> .bundle/config
       - sudo apt-get update -y
-      - sudo apt-get install -y linux-headers-generic dkms virtualbox virtualbox-dkms virtualbox-guest-dkms
+      - sudo apt-get install -y linux-headers-generic dkms virtualbox-dkms virtualbox virtualbox-guest-dkms
       - VBoxManage --version
-      - bundle install
+      - { command: 'bundle install', idle_timeout: 800 }
   tests:
     override:
       - rspec
       - kitchen test
+  cache:
+    directories: [ bin/, .gems/, .kitchen/, .vagrant/ ]
 checks:
   ruby: true
