@@ -5,7 +5,7 @@ before_install:
   - sudo apt-get update -y
   - sudo apt-get install -y dpkg-dev virtualbox-dkms
   - wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_i686.deb
-  - dpkg -i vagrant_1.7.2_i686.deb
+  - sudo dpkg -i vagrant_1.7.2_i686.deb
   - sudo apt-get install -y linux-headers-$(uname -r)
   - sudo dpkg-reconfigure virtualbox-dkms
   - VBoxManage --version
