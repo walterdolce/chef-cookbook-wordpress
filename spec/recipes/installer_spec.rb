@@ -64,4 +64,25 @@ describe 'chef-cookbook-wordpress::installer' do
     expect(chef_run).to create_template('Create/Update wp-config.php file')
       .with(mode: 0640, owner: 'root', group: 'root', cookbook: 'chef-cookbook-wordpress')
   end
+
+  context 'custom wp-config.php template' do
+    let(:chef_run) do
+      allow_any_instance_of(Chef::Mixin::Checksum).to receive(:checksum)
+                                                        .with('/wordpress-latest.zip')
+                                                        .and_return('checksum')
+      ChefSpec::SoloRunner.new(cookbook_path: '../') do |node|
+        node.set['wordpress']['installer']['downloaded_archive'] = '/wordpress-latest.zip'
+        node.set['wordpress']['installer']['wp_config_file_cookbook_source'] = 'another-cookbook'
+        node.set['wordpress']['installer']['wp_config_file_owner'] = 'another-owner'
+        node.set['wordpress']['installer']['wp_config_file_group'] = 'another-group'
+        node.set['wordpress']['installer']['wp_config_file_mode'] = 0777
+      end.converge(described_recipe)
+    end
+    it 'installs wp-config.php template file with custom attributes' do
+      allow(File).to receive(:exist?).with(anything).and_return(true)
+      allow(File).to receive(:exist?).with('./checksum').and_return(false)
+      expect(chef_run).to create_template('Create/Update wp-config.php file')
+        .with(mode: 0777, owner: 'another-owner', group: 'another-group', cookbook: 'another-cookbook')
+    end
+  end
 end
