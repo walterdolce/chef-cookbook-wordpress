@@ -1,5 +1,7 @@
 default['wordpress']['installer']['extraction_destination'] = './'
 default['wordpress']['installer']['wp_config_file_mode'] = 0640
+default['wordpress']['installer']['wp_config_file_group'] = 'root'
+default['wordpress']['installer']['wp_config_file_owner'] = 'root'
 
 default['wordpress']['installer']['wp_config']['db_name'] = ''
 default['wordpress']['installer']['wp_config']['db_user'] = ''
