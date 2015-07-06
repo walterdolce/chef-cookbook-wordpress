@@ -22,4 +22,4 @@ default['wordpress']['installer']['wp_config']['wp_debug'] = false
 # will translate in a PHP constant definition like
 # define('WP_CONSTANT', 'value')
 ##
-default['wordpress']['installer']['wp_config']['additional_values'] = {}
+default['wordpress']['installer']['wp_config']['additional_config_params'] = {}
