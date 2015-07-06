@@ -35,6 +35,7 @@ if node[:wordpress].attribute?(:installer) && node[:wordpress][:installer].attri
       owner node['wordpress']['installer']['wp_config_file_owner']
       mode node['wordpress']['installer']['wp_config_file_mode']
       action :create
+      cookbook node['wordpress']['installer']['wp_config_file_cookbook_source']
     end
 
   end

@@ -62,6 +62,6 @@ describe 'chef-cookbook-wordpress::installer' do
     allow(File).to receive(:exist?).with(anything).and_return(true)
     allow(File).to receive(:exist?).with('./checksum').and_return(false)
     expect(chef_run).to create_template('Create/Update wp-config.php file')
-      .with(mode: 0640, owner: 'root', group: 'root')
+      .with(mode: 0640, owner: 'root', group: 'root', cookbook: 'chef-cookbook-wordpress')
   end
 end
