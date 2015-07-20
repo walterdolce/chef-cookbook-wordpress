@@ -19,7 +19,7 @@
  * @package WordPress
  */
 
-// ** MySQL settings - You can get this info from your web host ** //
+// ** MySQL settings - You can get this info from your web host ** /
 /** The name of the database for WordPress */
 define('DB_NAME', '<%=node['wordpress']['installer']['wp_config']['db_name']%>');
 
@@ -74,6 +74,12 @@ $table_prefix  = '<%=node['wordpress']['installer']['wp_config']['table_prefix']
  * in their development environments.
  */
 define('WP_DEBUG', <%=node['wordpress']['installer']['wp_config']['wp_debug']%>);
+
+<% if node['wordpress']['installer']['wp_config']['additional_config_params']%>
+<% node['wordpress']['installer']['wp_config']['additional_config_params'].each do |constant_name, value|%>
+define('<%=constant_name%>', <%=value%>);
+<% end %>
+<% end %>
 
 /* That's all, stop editing! Happy blogging. */
 

@@ -1,5 +1,8 @@
 default['wordpress']['installer']['extraction_destination'] = './'
-default['wordpress']['installer']['wp_config_file_mode'] = 0640
+default['wordpress']['installer']['extraction_destination_dir_owner'] = 'root'
+default['wordpress']['installer']['extraction_destination_dir_group'] = 'root'
+default['wordpress']['installer']['extraction_destination_dir_mode'] = '0755'
+default['wordpress']['installer']['wp_config_file_mode'] = '0640'
 default['wordpress']['installer']['wp_config_file_group'] = 'root'
 default['wordpress']['installer']['wp_config_file_owner'] = 'root'
 default['wordpress']['installer']['wp_config_file_cookbook_source'] = 'chef-cookbook-wordpress'
@@ -26,3 +29,5 @@ default['wordpress']['installer']['wp_config']['wp_debug'] = false
 # define('WP_CONSTANT', 'value')
 ##
 default['wordpress']['installer']['wp_config']['additional_config_params'] = {}
+
+default['wordpress']['installer']['downloaded_archive'] = false

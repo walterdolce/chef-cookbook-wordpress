@@ -31,7 +31,7 @@ describe 'chef-cookbook-wordpress::downloader' do
     end
 
     it 'uses root as default destination directory user' do
-      expect(chef_run.node['wordpress']['downloader']['destination_dir_user']).to eq('root')
+      expect(chef_run.node['wordpress']['downloader']['destination_dir_owner']).to eq('root')
     end
 
     it 'uses root as default destination directory group' do
@@ -94,14 +94,14 @@ describe 'chef-cookbook-wordpress::downloader' do
     end
 
     it 'downloads Wordpress by assigning it to root user & group' do
-      expect(chef_run).to create_remote_file('./wordpress-latest.zip').with(user: 'root', group: 'root')
+      expect(chef_run).to create_remote_file('./wordpress-latest.zip').with(owner: 'root', group: 'root')
     end
 
     it 'downloads Wordpress by assigning it to a custom user and group' do
-      chef_run.node.set['wordpress']['downloader']['destination_file_user'] = 'automator'
+      chef_run.node.set['wordpress']['downloader']['destination_file_owner'] = 'automator'
       chef_run.node.set['wordpress']['downloader']['destination_file_group'] = 'automators'
       chef_run.converge(described_recipe)
-      expect(chef_run).to create_remote_file('./wordpress-latest.zip').with(user: 'automator', group: 'automators')
+      expect(chef_run).to create_remote_file('./wordpress-latest.zip').with(owner: 'automator', group: 'automators')
     end
 
     it 'downloads Wordpress by using a custom destination filename' do
@@ -133,15 +133,15 @@ describe 'chef-cookbook-wordpress::downloader' do
   end
 
   context 'directory actions context' do
-    it 'creates the destination directory with root as user & group assigned by default' do
-      expect(chef_run).to create_directory('./').with(user: 'root', group: 'root')
+    it 'creates the destination directory with root as owner & group assigned by default' do
+      expect(chef_run).to create_directory('./').with(owner: 'root', group: 'root')
     end
 
     it 'creates the destination directory with a custom user and group assigned' do
-      chef_run.node.set['wordpress']['downloader']['destination_dir_user'] =  'automator'
+      chef_run.node.set['wordpress']['downloader']['destination_dir_owner'] =  'automator'
       chef_run.node.set['wordpress']['downloader']['destination_dir_group'] = 'automators'
       chef_run.converge(described_recipe)
-      expect(chef_run).to create_directory('./').with(user: 'automator', group: 'automators')
+      expect(chef_run).to create_directory('./').with(owner: 'automator', group: 'automators')
     end
 
     it 'creates the destination directory if it does not exist and downloads Wordpress in there' do

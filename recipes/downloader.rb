@@ -18,7 +18,7 @@ package_version = "#{package_version}-IIS" if downloader['package_type'] == 'iis
 source = (downloader['protocol'] == 'file') ? "/#{downloader['source']}" : downloader['source']
 
 directory downloader['destination'] do
-  user downloader['destination_dir_user']
+  owner downloader['destination_dir_owner']
   group downloader['destination_dir_group']
   recursive true
   action :create
@@ -29,9 +29,9 @@ file_uri = File.join(downloader['destination'], "#{downloader['destination_filen
 remote_file 'Download Wordpress package' do
   path file_uri
   source "#{downloader['protocol']}://#{source}/#{package_version}.#{package_type}"
-  user downloader['destination_file_user']
+  owner downloader['destination_file_owner']
   group downloader['destination_file_group']
   action :create
 end
 
-node.set['wordpress']['installer']['downloaded_archive'] = file_uri
+node.default['wordpress']['installer']['downloaded_archive'] = file_uri

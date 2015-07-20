@@ -3,6 +3,7 @@
 
 # Test-Kitchen
 .kitchen
+.vagrant
 
 # Project
 bin

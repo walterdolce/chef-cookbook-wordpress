@@ -3,14 +3,10 @@ driver:
   name: vagrant
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
 
 platforms:
-#  - name: ubuntu-12.04
-#  - name: centos-6.4
-#  - name: centos-6.5
   - name: centos-6.6
-#  - name: centos-7
 
 suites:
   - name: downloader
@@ -19,4 +15,41 @@ suites:
     attributes:
       wordpress:
         downloader:
+          destination: "./mydownloadfolder/"
+  - name: installer
+    run_list:
+      - recipe[chef-cookbook-wordpress::downloader]
+      - recipe[chef-cookbook-wordpress::installer]
+    attributes:
+      wordpress:
+        downloader:
           destination: "/mydownloadfolder/"
+        installer:
+          extraction_destination: "/mydownloadfolder/myextractionfolder"
+          extraction_destination_dir_owner: 'vagrant'
+          extraction_destination_dir_group: 'vagrant'
+          wp_config_file_mode: "0777"
+          wp_config_file_group: vagrant
+          wp_config_file_owner: vagrant
+          wp_config:
+            db_name: 'mydbname'
+            db_user: 'mydbuser'
+            db_password: 'mydbpassword'
+            db_host: 'mydbhostname'
+            db_charset: 'mydbcharset'
+            db_collate: 'mydbcollate'
+            auth_key: 'myauthkey'
+            secure_auth_key: 'mysecureauthkey'
+            logged_in_key: 'myloggedinkey'
+            nonce_key: 'mynoncekey'
+            auth_salt: 'myauthsalt'
+            secure_auth_salt: 'mysecureauthsalt'
+            logged_in_salt: 'myloggedinsalt'
+            nonce_salt: 'mynoncesalt'
+            table_prefix: 'mytableprefix_'
+            wp_debug: true
+            additional_config_params:
+              param1: "'myparamstring'"
+              param2: true
+              param3: 123
+              param4: 123.123
