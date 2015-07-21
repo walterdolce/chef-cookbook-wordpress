@@ -9,3 +9,7 @@ group :development do
   gem 'kitchen-vagrant', '0.18.0'
   gem 'serverspec', '2.17.0'
 end
+
+group :docker do
+  gem 'kitchen-docker', '~> 2.3'
+end

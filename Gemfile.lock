@@ -97,6 +97,8 @@ GEM
     httpclient (2.6.0.1)
     ipaddress (0.8.0)
     json (1.8.3)
+    kitchen-docker (2.3.0)
+      test-kitchen (>= 1.0.0)
     kitchen-vagrant (0.18.0)
       test-kitchen (~> 1.4)
     libyajl2 (1.2.0)
@@ -234,6 +236,7 @@ PLATFORMS
 DEPENDENCIES
   berkshelf (= 3.3.0)
   chefspec (= 4.2.0)
+  kitchen-docker (~> 2.3)
   kitchen-vagrant (= 0.18.0)
   rake (= 10.4.2)
   rubocop (= 0.31.0)
