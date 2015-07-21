@@ -3,9 +3,12 @@
 
 # Project
 .bundle/
+.vagrant/
 .gems/
 bin/
 
 # Test-kitchen
 .kitchen/
 .kitchen.local.yml
+
+
