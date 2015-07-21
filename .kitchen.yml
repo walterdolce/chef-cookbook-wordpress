@@ -10,7 +10,7 @@ platforms:
     driver_config:
       provision_command:
         - groupadd vagrant
-        - useradd vagrant
+        - useradd -g vagrant vagrant
 
 suites:
   - name: downloader
