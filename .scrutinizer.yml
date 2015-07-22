@@ -1,10 +1,13 @@
 build:
+  cache:
+    directories:
+      - vendor/
   dependencies:
     before:
       - gem install bundle
       -
         command: 'bundle install --path=vendor/bundle --clean'
-        idle_timeout: 900
+        idle_timeout: 1800
   tests:
     before:
       -
