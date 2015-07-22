@@ -10,8 +10,7 @@ build:
       -
         command: 'sudo apt-get -y update'
         idle_timeout: 1800
-      - echo 'Pulling docker init script from zuazo/kitchen-in-travis on GitHub'
-      - source <(curl -sL https://raw.githubusercontent.com/zuazo/kitchen-in-travis/0.1.0/scripts/start_docker.sh)
+      - source scripts/start_docker.sh
       -
         command: echo 'Setting up test environment variable'
         environment: { TRAVIS: 'true' }
