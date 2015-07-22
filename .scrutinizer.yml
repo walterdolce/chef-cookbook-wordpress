@@ -3,7 +3,7 @@ build:
     before:
       - gem install bundle
       -
-        command: 'bundle install'
+        command: 'bundle install --path=vendor/bundle --clean'
         idle_timeout: 900
   tests:
     before:
