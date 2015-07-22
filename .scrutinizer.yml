@@ -7,6 +7,9 @@ build:
         idle_timeout: 900
   tests:
     before:
+      -
+        command: 'sudo apt-get -y update'
+        idle_timeout: 1800
       - echo 'Pulling docker init script from zuazo/kitchen-in-travis on GitHub'
       - source <(curl -sL https://raw.githubusercontent.com/zuazo/kitchen-in-travis/0.1.0/scripts/start_docker.sh)
       -
@@ -14,7 +17,7 @@ build:
         environment: { TRAVIS: 'true' }
         background: false
     override:
-      - bundle exec rake integration:docker
+      - rake integration:docker
   environment:
     ruby: '2.2.0'
 checks:
