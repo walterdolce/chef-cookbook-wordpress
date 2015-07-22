@@ -1,4 +1,10 @@
 build:
+  dependencies:
+    before:
+      - gem install bundle
+      -
+        command: 'bundle install'
+        idle_timeout: 900
   tests:
     before:
       - echo 'Pulling docker init script from zuazo/kitchen-in-travis on GitHub'
