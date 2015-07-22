@@ -7,10 +7,6 @@ provisioner:
 
 platforms:
   - name: centos-6.6
-    driver_config:
-      provision_command:
-        - groupadd vagrant
-        - useradd -g vagrant vagrant
 
 suites:
   - name: downloader
@@ -24,6 +20,10 @@ suites:
     run_list:
       - recipe[chef-cookbook-wordpress::downloader]
       - recipe[chef-cookbook-wordpress::installer]
+    driver:
+      provision_command:
+        - groupadd vagrant
+        - useradd -g vagrant vagrant
     attributes:
       wordpress:
         downloader:
