@@ -10,7 +10,9 @@ build:
       -
         command: 'sudo apt-get -y update'
         idle_timeout: 1800
-      - source scripts/start_docker.sh
+      -
+        command: 'source scripts/start_docker.sh'
+        idle_timeout: 900
       -
         command: echo 'Setting up test environment variable'
         environment: { TRAVIS: 'true' }
